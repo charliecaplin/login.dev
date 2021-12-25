@@ -1,5 +1,5 @@
 from flask import Flask, Response, jsonify, abort, make_response,  render_template, redirect, request
-from faster_than_requests import requests
+import requests
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 import json, requests, traceback, os, lxml, re, urllib, urllib3, urllib.parse, argparse, pytz, urllib.request, time, httpx
