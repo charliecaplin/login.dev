@@ -4,7 +4,6 @@ gunicorn
 bs4
 pytz
 lxml
-faster-than-requests
 Werkzeug
 httpx
 httpx[http2]
