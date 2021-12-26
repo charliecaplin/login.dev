@@ -206,7 +206,8 @@ def three(q):
 @app.route("/getqrimage/<q>")
 def four(q):
     try:
-        return app.send_static_file(q)
+        paths = "/qrimage/{}".format(q)
+        return app.send_static_file(paths)
     except Exception as error:
         print (error)
         #print ("error, contact the creator")
