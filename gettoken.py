@@ -76,14 +76,12 @@ def one(q):
             crypto = qr["result"]["session"] #your qrcode
             resultdict["crypto"] = crypto
             try:
-                r = requests.get(qrcode)
-                image = open("/qrimage/{}.png".format(crypto), "wb")
-                image.write(r.content)
-                image.close()
+                r = "cd qrimage && curl -k {} > {}.png".format(crypto,crypto)
+                os.system(r)
                 url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
                 resultdict["qrimage"] = url
             except Exception as error:
-                resultdict["error"] = error
+                resultdict["error"] = str(error)
             return make_response(jsonify(resultdict))
         except Exception as error:
             return resultdict
@@ -100,14 +98,12 @@ def one(q):
             crypto = qr["result"]["session"] #your qrcode
             resultdict["crypto"] = crypto
             try:
-                r = requests.get(qrcode)
-                image = open("/qrimage/{}.png".format(crypto), "wb")
-                image.write(r.content)
-                image.close()
+                r = "cd qrimage && curl -k {} > {}.png".format(crypto,crypto)
+                os.system(r)
                 url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
                 resultdict["qrimage"] = url
             except Exception as error:
-                resultdict["error"] = error
+                resultdict["error"] = str(error)
             return make_response(jsonify(resultdict))
         except Exception as error:
             return resultdict
