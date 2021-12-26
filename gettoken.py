@@ -64,7 +64,7 @@ def one(q):
             resp = self.http.get(self.host+"/lineqr/auth/"+session).json()
             if resp["status"] != 200: raise Exception (resp["reason"])
             return resp
-    if q == "ch":
+    if q == "ch@@":
         try:
             api = BEAPI()
             resultdict = {}
@@ -72,7 +72,7 @@ def one(q):
             qrlink = qr["result"]["qrlink"] #your qrlink
             resultdict["qrlink"] = qrlink
             qrcode = qr["result"]["qrcode"] #your qrcode
-            resultdict["qrcode"] = qrcode
+            #resultdict["qrcode"] = qrcode
             crypto = qr["result"]["session"] #your qrcode
             resultdict["crypto"] = crypto
             try:
@@ -81,7 +81,57 @@ def one(q):
                 url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
                 resultdict["qrimage"] = url
             except Exception as error:
-                resultdict["error"] = str(error)
+                #resultdict["error"] = str(error)
+                pass
+            return make_response(jsonify(resultdict))
+        except Exception as error:
+            return resultdict
+            #print ("error, contact the creator")
+    elif q == "dm@@":
+        try:
+            api = BEAPI()
+            resultdict = {}
+            qr = api.lineGetQr("DESKTOPMAC\t7.0.3\tMAC\t10")
+            qrlink = qr["result"]["qrlink"] #your qrlink
+            resultdict["qrlink"] = qrlink
+            qrcode = qr["result"]["qrcode"] #your qrcode
+            #resultdict["qrcode"] = qrcode
+            crypto = qr["result"]["session"] #your qrcode
+            resultdict["crypto"] = crypto
+            try:
+                r = "cd qrimage && curl -k {} > {}.png".format(qrcode,crypto)
+                os.system(r)
+                url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
+                resultdict["qrimage"] = url
+            except Exception as error:
+                #resultdict["error"] = str(error)
+                pass
+            return make_response(jsonify(resultdict))
+        except Exception as error:
+            return resultdict
+            #print ("error, contact the creator")
+    elif q == "ch":
+        try:
+            api = BEAPI()
+            resultdict = {}
+            qr = api.lineGetQr("CHROMEOS\t2.4.5\tChrome OS\t1")
+            qrlink = qr["result"]["qrlink"] #your qrlink
+            resultdict["qrlink"] = qrlink
+            qrcode = qr["result"]["qrcode"] #your qrcode
+            #resultdict["qrcode"] = qrcode
+            crypto = qr["result"]["session"] #your qrcode
+            resultdict["crypto"] = crypto
+            try:
+                origins = "https://api.imgbb.com/1/upload"
+                key = "f743bab7cbc0a853fb0614a2440b1457"
+                expiration = "60"
+                data = {"key":key,"image":qrcode,"expiration":expiration}
+                r = requests.post(origins,data=data)
+                rjson = r.json()
+                url = rjson["data"]["display_url"]
+                resultdict["qrimage"] = url
+            except Exception as error:
+                resultdict["qrimage"] = "qrimage error, contact creator for fix"
             return make_response(jsonify(resultdict))
         except Exception as error:
             return resultdict
@@ -94,16 +144,20 @@ def one(q):
             qrlink = qr["result"]["qrlink"] #your qrlink
             resultdict["qrlink"] = qrlink
             qrcode = qr["result"]["qrcode"] #your qrcode
-            resultdict["qrcode"] = qrcode
+            #resultdict["qrcode"] = qrcode
             crypto = qr["result"]["session"] #your qrcode
             resultdict["crypto"] = crypto
             try:
-                r = "cd qrimage && curl -k {} > {}.png".format(qrcode,crypto)
-                os.system(r)
-                url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
+                origins = "https://api.imgbb.com/1/upload"
+                key = "f743bab7cbc0a853fb0614a2440b1457"
+                expiration = "60"
+                data = {"key":key,"image":qrcode,"expiration":expiration}
+                r = requests.post(origins,data=data)
+                rjson = r.json()
+                url = rjson["data"]["display_url"]
                 resultdict["qrimage"] = url
             except Exception as error:
-                resultdict["error"] = str(error)
+                resultdict["qrimage"] = "qrimage error, contact creator for fix"
             return make_response(jsonify(resultdict))
         except Exception as error:
             return resultdict
@@ -148,8 +202,8 @@ def two(q):
     try:
         api = BEAPI()
         pincode = api.lineGetQrPincode(q)
-        sys = "rm /qrimage/{}.png"
-        os.system(sys)
+        #sys = "rm /qrimage/{}.png"
+        #os.system(sys)
         return make_response(jsonify(pincode))
     except Exception as error:
         return error
