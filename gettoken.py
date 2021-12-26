@@ -203,11 +203,10 @@ def three(q):
         print (error)
         #print ("error, contact the creator")
 
-@app.route("/getqrimage/<q>")
-def four(q):
+@app.route('/getqrimage/<path:path>')
+def send_static_content(path):
     try:
-        paths = "/qrimage/{}".format(q)
-        return app.send_static_file(paths)
+        return send_from_directory('qrimage', path)
     except Exception as error:
         print (error)
         #print ("error, contact the creator")
