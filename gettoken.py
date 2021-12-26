@@ -76,7 +76,7 @@ def one(q):
             crypto = qr["result"]["session"] #your qrcode
             resultdict["crypto"] = crypto
             try:
-                r = "cd qrimage && curl -k {} > {}.png".format(crypto,crypto)
+                r = "cd qrimage && curl -k {} > {}.png".format(qrcode,crypto)
                 os.system(r)
                 url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
                 resultdict["qrimage"] = url
@@ -98,7 +98,7 @@ def one(q):
             crypto = qr["result"]["session"] #your qrcode
             resultdict["crypto"] = crypto
             try:
-                r = "cd qrimage && curl -k {} > {}.png".format(crypto,crypto)
+                r = "cd qrimage && curl -k {} > {}.png".format(qrcode,crypto)
                 os.system(r)
                 url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
                 resultdict["qrimage"] = url
