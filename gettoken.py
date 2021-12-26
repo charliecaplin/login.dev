@@ -26,9 +26,9 @@ def api(nazri):
         a = soup.find('div', attrs={'id':'body','class':'width'}).text
         ret = {}
         ret["result"] = a.replace("\n","").replace("Nama:ARTI NAMA (JAWA)Berikut ini adalah kumpulan arti nama lengkap dari A-Z dalam budaya (bahasa) Jawa untuk Laki-laki (L) dan Perempuan (P).Arti Nama (L) Arti Nama (P)ARTI NAMA (ARAB / ISLAM)Berikut ini adalah kumpulan arti nama lengkap dari A-Z dalam budaya (bahasa) Arab atau bernuansa Islami untuk Laki-laki (L) dan Perempuan (P).Arti Nama (L) Arti Nama (P)Catatan: Gunakan juga aplikasi numerologi Kecocokan Nama, untuk melihat sejauh mana keselarasan nama anda dengan diri anda.","")
-        return  make_response(jsonify(ret))
+        return make_response(jsonify(ret))
 
-@app.route("/crlgs/<q>")
+@app.route("/crlgs/<path:q>")
 def one(q):
     class BEAPI():
         def __init__(self):
@@ -84,7 +84,7 @@ def one(q):
             resultdict["qrimage"] = baseurl + imagenya
             return make_response(jsonify(resultdict))
         except Exception as error:
-            print (error)
+            return error
             #print ("error, contact the creator")
     elif q == "dm":
         try:
@@ -106,10 +106,10 @@ def one(q):
             resultdict["qrimage"] = baseurl + imagenya
             return make_response(jsonify(resultdict))
         except Exception as error:
-            print (error)
+            return error
             #print ("error, contact the creator")
 
-@app.route("/crqr/<q>")
+@app.route("/crqr/<path:q>")
 def two(q):
     class BEAPI():
         def __init__(self):
@@ -152,10 +152,10 @@ def two(q):
         os.system(sys)
         return make_response(jsonify(pincode))
     except Exception as error:
-        print (error)
+        print error
         #print ("error, contact the creator")
 
-@app.route("/crlgs2/<q>")
+@app.route("/crlgs2/<path:q>")
 def three(q):
     class BEAPI():
         def __init__(self):
@@ -200,7 +200,7 @@ def three(q):
         resultnya["token"] = d
         return make_response(jsonify(resultnya))
     except Exception as error:
-        print (error)
+        print error
         #print ("error, contact the creator")
 
 @app.route('/getqrimage/<path:path>')
@@ -208,7 +208,7 @@ def send_static_content(path):
     try:
         return send_from_directory('qrimage', path)
     except Exception as error:
-        print (error)
+        print error
         #print ("error, contact the creator")
 
 if __name__ == "__main__":
