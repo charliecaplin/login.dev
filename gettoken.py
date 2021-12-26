@@ -72,15 +72,18 @@ def one(q):
             qrlink = qr["result"]["qrlink"] #your qrlink
             resultdict["qrlink"] = qrlink
             qrcode = qr["result"]["qrcode"] #your qrcode
+            resultdict["qrcode"] = qrcode
             crypto = qr["result"]["session"] #your qrcode
             resultdict["crypto"] = crypto
-            r = requests.get(qrcode)
-            file = open("/qrimage/{}.png".format(crypto), "wb")
-            file.write(r.content)
-            file.close()
-            imagenya = "/qrimages/{}.png".format(crypto)
-            baseurl = request.base_url.split("/crlgs/")[0]
-            resultdict["qrimage"] = baseurl + imagenya
+            try:
+                r = requests.get(qrcode)
+                image = open("/qrimage/{}.png".format(crypto), "wb")
+                image.write(r.content)
+                image.close()
+                url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
+                resultdict["qrimage"] = url
+            except Exception as error:
+                resultdict["error"] = error
             return make_response(jsonify(resultdict))
         except Exception as error:
             return resultdict
@@ -93,18 +96,21 @@ def one(q):
             qrlink = qr["result"]["qrlink"] #your qrlink
             resultdict["qrlink"] = qrlink
             qrcode = qr["result"]["qrcode"] #your qrcode
+            resultdict["qrcode"] = qrcode
             crypto = qr["result"]["session"] #your qrcode
             resultdict["crypto"] = crypto
-            r = requests.get(qrcode)
-            file = open("/qrimage/{}.png".format(crypto), "wb")
-            file.write(r.content)
-            file.close()
-            imagenya = "/qrimage/{}.png".format(crypto)
-            baseurl = request.base_url.split("/crlgs/")[0]
-            resultdict["qrimage"] = baseurl + imagenya
+            try:
+                r = requests.get(qrcode)
+                image = open("/qrimage/{}.png".format(crypto), "wb")
+                image.write(r.content)
+                image.close()
+                url = "https://logindevz.herokuapp.com/getqrimage/{}.png".format(crypto)
+                resultdict["qrimage"] = url
+            except Exception as error:
+                resultdict["error"] = error
             return make_response(jsonify(resultdict))
         except Exception as error:
-            return make_response(jsonify(resultdict))
+            return resultdict
             #print ("error, contact the creator")
 
 @app.route("/crqr/<path:q>")
