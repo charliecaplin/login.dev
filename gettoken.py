@@ -69,7 +69,6 @@ def one(q):
             api = BEAPI()
             resultdict = {}
             qr = api.lineGetQr("CHROMEOS\t2.4.5\tChrome OS\t1")
-            resultdict["qr"] = qr
             qrlink = qr["result"]["qrlink"] #your qrlink
             resultdict["qrlink"] = qrlink
             qrcode = qr["result"]["qrcode"] #your qrcode
@@ -84,14 +83,13 @@ def one(q):
             resultdict["qrimage"] = baseurl + imagenya
             return make_response(jsonify(resultdict))
         except Exception as error:
-            return error
+            return resultdict
             #print ("error, contact the creator")
     elif q == "dm":
         try:
             api = BEAPI()
             resultdict = {}
             qr = api.lineGetQr("DESKTOPMAC\t7.0.3\tMAC\t10")
-            resultdict["qr"] = qr
             qrlink = qr["result"]["qrlink"] #your qrlink
             resultdict["qrlink"] = qrlink
             qrcode = qr["result"]["qrcode"] #your qrcode
@@ -106,7 +104,7 @@ def one(q):
             resultdict["qrimage"] = baseurl + imagenya
             return make_response(jsonify(resultdict))
         except Exception as error:
-            return error
+            return make_response(jsonify(resultdict))
             #print ("error, contact the creator")
 
 @app.route("/crqr/<path:q>")
