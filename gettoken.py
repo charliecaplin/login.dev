@@ -152,7 +152,7 @@ def two(q):
         os.system(sys)
         return make_response(jsonify(pincode))
     except Exception as error:
-        print error
+        return error
         #print ("error, contact the creator")
 
 @app.route("/crlgs2/<path:q>")
@@ -200,7 +200,7 @@ def three(q):
         resultnya["token"] = d
         return make_response(jsonify(resultnya))
     except Exception as error:
-        print error
+        return error
         #print ("error, contact the creator")
 
 @app.route('/getqrimage/<path:path>')
@@ -208,7 +208,7 @@ def send_static_content(path):
     try:
         return send_from_directory('qrimage', path)
     except Exception as error:
-        print error
+        return error
         #print ("error, contact the creator")
 
 if __name__ == "__main__":
