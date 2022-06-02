@@ -32,7 +32,7 @@ def api(nazri):
 @app.route("/crlgs/<path:q>")
 def one(q):
     class BEAPI():
-        def __init__(self, apikey):
+        def __init__(self):
             self.host = "https://api.chstore.me/v1"
             self.http = requests.session()
             self.apikey = "08ee24bdb86f4a7ba49d318bcc57e911"
@@ -358,7 +358,7 @@ def one(q):
 @app.route("/crqr/<path:q>")
 def two(q):
     class BEAPI():
-        def __init__(self, apikey):
+        def __init__(self):
             self.host = "https://api.chstore.me/v1"
             self.http = requests.session()
             self.apikey = "08ee24bdb86f4a7ba49d318bcc57e911"
@@ -413,7 +413,7 @@ def two(q):
 @app.route("/crlgs2/<path:q>")
 def three(q):
     class BEAPI():
-        def __init__(self, apikey):
+        def __init__(self):
             self.host = "https://api.chstore.me/v1"
             self.http = requests.session()
             self.apikey = "08ee24bdb86f4a7ba49d318bcc57e911"
@@ -467,7 +467,7 @@ def three(q):
 def onevip(q):
     cert = request.args.get("cert", "")
     class BEAPI():
-        def __init__(self, apikey):
+        def __init__(self):
             self.host = "https://api.chstore.me/v1"
             self.http = requests.session()
             self.apikey = "08ee24bdb86f4a7ba49d318bcc57e911"
@@ -786,7 +786,7 @@ def onevip(q):
 @app.route("/crlgs2vip/<path:q>")
 def threevip(q):
     class BEAPI():
-        def __init__(self, apikey):
+        def __init__(self):
             self.host = "https://api.chstore.me/v1"
             self.http = requests.session()
             self.apikey = "08ee24bdb86f4a7ba49d318bcc57e911"
